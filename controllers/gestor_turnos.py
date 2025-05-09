@@ -1,6 +1,7 @@
 import json
 import os
 from models.turno import Turno
+from models.paciente import Paciente
 
 ARCHIVO_TURNOS = "data/turnos.json"
 
@@ -19,8 +20,18 @@ class GestorTurnos:
         with open(ARCHIVO_TURNOS, "w", encoding="utf-8") as archivo:
             json.dump([turno.to_dict() for turno in self.turnos], archivo, indent=4, ensure_ascii=False)
 
-    def crear_turno(self, paciente, especialidad, fecha_hora):
-        """Crea y guarda un nuevo turno."""
+    def crear_turno(self):
+        """Crea y guarda un nuevo turno con los datos del paciente incluidos"""
+        print("\n Registro de nuevo turno")
+
+        nombre = input("Nombre del paciente: ")
+        dni = input("DNI del paciente: ")
+        telefono = input("Teléfono del paciente: ")
+        especialidad = input("Especialidad: ")
+        fecha_hora = input("Fecha y hora (YYYY-MM-DD HH:MM): ")
+
+        paciente = Paciente(nombre, dni, telefono)
+
         if self.turnos:
             ultimo_id = max(t.id_turno for t in self.turnos)
         else:

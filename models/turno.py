@@ -1,23 +1,27 @@
 # models/turno.py
 
 from datetime import datetime
+from models.paciente import Paciente
 
 class Turno:
     def __init__(self, id_turno, paciente, especialidad, fecha_hora, estado="pendiente"):
         self.id_turno = id_turno  # identificador único
         self.paciente = paciente
         self.especialidad = especialidad
-        self.fecha_hora = datetime.strptime(fecha_hora, "%Y-%m-%d %H:%M")
+        self.fecha_hora = datetime.strptime(fecha_hora, "%Y-%m-%d %H:%M") if isinstance(fecha_hora, str) else fecha_hora
         self.estado = estado
 
     def __str__(self):
-        return f"Turno #{self.id_turno} - {self.paciente} ({self.especialidad}) - {self.fecha_hora.strftime('%d/%m/%Y %H:%M')} - Estado: {self.estado}"
+        return (
+            f"Turno #{self.id_turno} - {self.paciente.nombre} ({self.especialidad}) "
+            f"- {self.fecha_hora.strftime('%d/%m/%Y %H:%M')} - Estado: {self.estado}"
+        )
 
     def to_dict(self):
         """Convierte el objeto en un diccionario serializable a JSON."""
         return {
             "id_turno": self.id_turno,
-            "paciente": self.paciente,
+            "paciente": self.paciente.to_dict(),
             "especialidad": self.especialidad,
             "fecha_hora": self.fecha_hora.strftime("%Y-%m-%d %H:%M"),
             "estado": self.estado
@@ -54,15 +58,15 @@ class Turno:
             "estado": self.estado
         }
 
-    @staticmethod
-    def from_dict(data):
-        """Crea un objeto Turno a partir de un diccionario (desde JSON)"""
-        return Turno(
-            data["id_turno"],
-            data["id_paciente"],
-            data["fecha"],
-            data["hora"],
-            data["especialidad"],
-            data.get("estado", "activo")  # Usa "activo" si no viene en el JSON
+    @classmethod
+    def from_dict(cls, data):
+        """Crea un objeto Turno a partir de un diccionario."""
+        paciente = Paciente.from_dict(data["paciente"])
+        return cls(
+            id_turno=data["id_turno"],
+            paciente=paciente,
+            especialidad=data["especialidad"],
+            fecha_hora=data["fecha_hora"],
+            estado=data["estado"]
         )
 

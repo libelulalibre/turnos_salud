@@ -1,7 +1,5 @@
 Gestor de Turnos para Centros de Salud
 
-Descripción del Proyecto
-
 Este proyecto es un sistema de gestión de turnos médicos diseñado para centros de salud. 
 Permite:
 
@@ -11,6 +9,15 @@ Permite:
 ✅ Eliminar turnos
 ✅ Validar horarios (Lunes a Viernes, de 8:00 a 18:00)
 ✅ Persistencia de datos (almacena turnos en un archivo JSON)
+
+Configuración del entorno virtual
+
+# Crear entorno virtual
+Termial: python -m venv venv
+
+# Activar entorno (Windows)
+Terminal .\venv\Scripts\activat
+
 
 turnos_salud/
 ├── data/
@@ -23,3 +30,23 @@ turnos_salud/
 ├── main.py                  # Punto de entrada del programa
 ├── README.md                # Este archivo
 └── requirements.txt         # Dependencias (vacío o con librerías adicionales)
+
+
+Ejecución del Programa
+
+Terminal: python main.py
+
+Sigue el menú interactivo:
+
+--- MENÚ DE GESTIÓN DE TURNOS ---
+1. Registrar turno
+2. Listar turnos
+3. Modificar turno
+4. Eliminar turno
+5. Salir
+
+
+
+Desarrollado por: Nicolás Cárdenas
+Fecha de entrega: 12/05/2025
+Curso: Curso Python + FastAPI

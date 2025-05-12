@@ -1,9 +1,9 @@
 class Paciente:
     def __init__(self, id_paciente, nombre, dni, especialidad):
-        self.id_paciente = id_paciente  # Un identificador único
+        self.id_paciente = id_paciente  
         self.nombre = nombre
-        self.dni = dni  # Documento de identidad
-        self.especialidad = especialidad  # A qué especialista necesita ver
+        self.dni = dni  
+        self.especialidad = especialidad  
 
     def to_dict(self):
         """Convierte el objeto en un diccionario para guardarlo en JSON"""

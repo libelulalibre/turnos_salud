@@ -7,7 +7,7 @@ class Turno:
         dni: str,
         nombre: str,
         especialidad: str,
-        fecha_hora: str,  # Formato: "YYYY-MM-DD HH:MM"
+        fecha_hora: str,  # Formato: año,mes,dia hora, minutos
         estado: str = "pendiente",
     ):
         self.dni = dni.strip()

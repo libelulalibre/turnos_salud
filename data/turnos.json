@@ -5,5 +5,19 @@
         "especialidad": "Odonto",
         "fecha_hora": "2025-05-20 16:00",
         "estado": "pendiente"
+    },
+    {
+        "dni": "38952455",
+        "nombre": "Franco",
+        "especialidad": "Odontologia",
+        "fecha_hora": "2025-05-20 16:00",
+        "estado": "pendiente"
+    },
+    {
+        "dni": "38910884",
+        "nombre": "Nicolas Cardenas",
+        "especialidad": "Cardiologia",
+        "fecha_hora": "2025-05-20 08:30",
+        "estado": "pendiente"
     }
 ]

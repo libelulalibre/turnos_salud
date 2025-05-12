@@ -3,15 +3,15 @@ import os
 from datetime import datetime, time
 from models.turno import Turno
 
-# Configuración de horarios
-HORARIO_APERTURA = time(8, 0)  # 8:00 AM
-HORARIO_CIERRE = time(18, 0)    # 6:00 PM
+# Horario disponible
+HORARIO_APERTURA = time(8, 0)  
+HORARIO_CIERRE = time(18, 0)    
 ARCHIVO_TURNOS = "data/turnos.json"
 
 class GestorTurnos:
     def __init__(self):
-        self.turnos = []  # Inicialización explícita
-        self.cargar_turnos()  # Carga los turnos al iniciar
+        self.turnos = []  
+        self.cargar_turnos()  
 
     def cargar_turnos(self):
         """Carga los turnos desde el archivo JSON."""
@@ -25,24 +25,25 @@ class GestorTurnos:
 
     def guardar_turnos(self):
         """Guarda los turnos en el archivo JSON."""
-        os.makedirs(os.path.dirname(ARCHIVO_TURNOS), exist_ok=True)  # Crea la carpeta si no existe
+        os.makedirs(os.path.dirname(ARCHIVO_TURNOS), exist_ok=True)  
         with open(ARCHIVO_TURNOS, "w", encoding="utf-8") as archivo:
             json.dump([turno.to_dict() for turno in self.turnos], archivo, indent=4, ensure_ascii=False)
 
+        # Validar día laborables
     def es_dia_laborable(self, fecha):
         """Valida si la fecha es de Lunes a Viernes."""
-        return fecha.weekday() < 5  # 0=Lunes, 4=Viernes
+        return fecha.weekday() < 5 
 
     def validar_disponibilidad(self, especialidad, fecha_hora_str):
         """Valida disponibilidad considerando días y horarios."""
         try:
             nueva_fecha_hora = datetime.strptime(fecha_hora_str, "%Y-%m-%d %H:%M")
             
-            # Validar día laborable
+            # Validar día 
             if not self.es_dia_laborable(nueva_fecha_hora):
                 return False, "❌ Solo se asignan turnos de Lunes a Viernes"
 
-            # Validar horario de atención
+            # Validar horario 
             if not (HORARIO_APERTURA <= nueva_fecha_hora.time() <= HORARIO_CIERRE):
                 return False, f"❌ Horario no válido ({HORARIO_APERTURA.strftime('%H:%M')} a {HORARIO_CIERRE.strftime('%H:%M')})"
 
@@ -79,4 +80,4 @@ class GestorTurnos:
         except ValueError as e:
             print(f"\n❌ Error: {e}")
 
-    # ... (resto de métodos: listar_turnos, modificar_turno, eliminar_turno)
+ 

@@ -11,15 +11,12 @@ def mostrar_menu():
 def main():
     gestor = GestorTurnos()
     
-    # Datos de ejemplo (opcional)
-    # gestor.crear_turno("12345678", "Juan Pérez", "Cardiología", "2025-05-10 10:30")
-    
     while True:
         mostrar_menu()
         opcion = input("Selecciona una opción: ")
 
         if opcion == "1":
-            gestor.registrar_turno()  # Cambiado a registrar_turno que pide inputs
+            gestor.registrar_turno()  
         elif opcion == "2":
             gestor.listar_turnos()
         elif opcion == "3":

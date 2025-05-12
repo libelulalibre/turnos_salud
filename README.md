@@ -18,6 +18,25 @@ Termial: python -m venv venv
 # Activar entorno (Windows)
 Terminal .\venv\Scripts\activat
 
+Instalar dependencias
+
+Terminal: pip install -r requirements.txt
+
+Crear repositorio local
+
+# Desde la carpeta del proyecto, abrí la terminal y ejecuté:
+Terminal: git init
+# Crear archivos y hacer primer comit
+Terminal: git add .
+Terminal: git commit -m "Inicio proyecto: estructura y clases base"
+
+Crear el repositorio en GitHub
+
+# Ingresá a https://github.com
+# Crear nuevo repositorio: gestion-turnos
+# Conectar tu repositorio local con GitHub
+Terminal: git remote add origin https://github.com//libelulalibre/gestion-turnos.git
+Teminal: git push -u origin main
 
 turnos_salud/
 ├── data/
@@ -50,3 +69,4 @@ Sigue el menú interactivo:
 Desarrollado por: Nicolás Cárdenas
 Fecha de entrega: 12/05/2025
 Curso: Curso Python + FastAPI
+

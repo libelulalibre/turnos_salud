@@ -1,72 +1,54 @@
-# models/turno.py
-
 from datetime import datetime
-from models.paciente import Paciente
+from typing import Optional
 
 class Turno:
-    def __init__(self, id_turno, paciente, especialidad, fecha_hora, estado="pendiente"):
-        self.id_turno = id_turno  # identificador único
-        self.paciente = paciente
-        self.especialidad = especialidad
-        self.fecha_hora = datetime.strptime(fecha_hora, "%Y-%m-%d %H:%M") if isinstance(fecha_hora, str) else fecha_hora
-        self.estado = estado
+    def __init__(
+        self,
+        dni: str,
+        nombre: str,
+        especialidad: str,
+        fecha_hora: str,  # Formato: "YYYY-MM-DD HH:MM"
+        estado: str = "pendiente",
+    ):
+        self.dni = dni.strip()
+        self.nombre = nombre.strip()
+        self.especialidad = especialidad.strip()
+        self.fecha_hora = self._validar_fecha(fecha_hora)
+        self.estado = estado.lower()
 
-    def __str__(self):
+    def _validar_fecha(self, fecha_str: str) -> datetime:
+        """Convierte y valida el formato de fecha."""
+        try:
+            return datetime.strptime(fecha_str.strip(), "%Y-%m-%d %H:%M")
+        except ValueError as e:
+            raise ValueError(f"Formato de fecha inválido. Use: YYYY-MM-DD HH:MM. Error: {e}")
+
+    def __str__(self) -> str:
+        """Representación legible del turno."""
         return (
-            f"Turno #{self.id_turno} - {self.paciente.nombre} ({self.especialidad}) "
-            f"- {self.fecha_hora.strftime('%d/%m/%Y %H:%M')} - Estado: {self.estado}"
+            f"Turno - {self.nombre} (DNI: {self.dni})\n"
+            f"Especialidad: {self.especialidad}\n"
+            f"Fecha/Hora: {self.fecha_hora.strftime('%d/%m/%Y %H:%M')}\n"
+            f"Estado: {self.estado}"
         )
 
-    def to_dict(self):
-        """Convierte el objeto en un diccionario serializable a JSON."""
+    def to_dict(self) -> dict:
+        """Convierte el turno a un diccionario para guardar en JSON."""
         return {
-            "id_turno": self.id_turno,
-            "paciente": self.paciente.to_dict(),
+            "dni": self.dni,
+            "nombre": self.nombre,
             "especialidad": self.especialidad,
             "fecha_hora": self.fecha_hora.strftime("%Y-%m-%d %H:%M"),
-            "estado": self.estado
+            "estado": self.estado,
         }
 
     @classmethod
-    def from_dict(cls, data):
-        """Crea un objeto Turno a partir de un diccionario."""
+    def from_dict(cls, data: dict) -> "Turno":
+        """Crea un Turno desde un diccionario (para cargar desde JSON)."""
         return cls(
-            id_turno=data["id_turno"],
-            paciente=data["paciente"],
+            dni=data["dni"],
+            nombre=data["nombre"],
             especialidad=data["especialidad"],
             fecha_hora=data["fecha_hora"],
-            estado=data["estado"]
+            estado=data.get("estado", "pendiente"),
         )
-
-class Turno:
-    def __init__(self, id_turno, id_paciente, fecha, hora, especialidad, estado="activo"):
-        self.id_turno = id_turno
-        self.id_paciente = id_paciente
-        self.fecha = fecha  # Ej: '2025-05-10'
-        self.hora = hora    # Ej: '14:30'
-        self.especialidad = especialidad
-        self.estado = estado  # Por defecto "activo"
-
-    def to_dict(self):
-        """Convierte el objeto en un diccionario para guardarlo en JSON"""
-        return {
-            "id_turno": self.id_turno,
-            "id_paciente": self.id_paciente,
-            "fecha": self.fecha,
-            "hora": self.hora,
-            "especialidad": self.especialidad,
-            "estado": self.estado
-        }
-
-    @classmethod
-    def from_dict(cls, data):
-        """Crea un objeto Turno a partir de un diccionario."""
-        paciente = Paciente.from_dict(data["paciente"])
-        return cls(
-            id_turno=data["id_turno"],
-            paciente=paciente,
-            especialidad=data["especialidad"],
-            fecha_hora=data["fecha_hora"],
-            estado=data["estado"]
-        )
-

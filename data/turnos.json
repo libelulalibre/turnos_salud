@@ -4,20 +4,47 @@
         "nombre": "Nicolas",
         "especialidad": "Odonto",
         "fecha_hora": "2025-05-20 16:00",
-        "estado": "pendiente"
+        "estado": "pendiente",
+        "id_turno": 1
     },
     {
         "dni": "38952455",
         "nombre": "Franco",
         "especialidad": "Odontologia",
         "fecha_hora": "2025-05-20 16:00",
-        "estado": "pendiente"
+        "estado": "pendiente",
+        "id_turno": 2
     },
     {
         "dni": "38910884",
         "nombre": "Nicolas Cardenas",
         "especialidad": "Cardiologia",
         "fecha_hora": "2025-05-20 08:30",
-        "estado": "pendiente"
+        "estado": "pendiente",
+        "id_turno": 3
+    },
+    {
+        "dni": "38910884",
+        "nombre": "Nicolás Cárdenas",
+        "especialidad": "Oftalgomolo",
+        "fecha_hora": "2025-05-13 10:30",
+        "estado": "pendiente",
+        "id_turno": 4
+    },
+    {
+        "dni": "38910884",
+        "nombre": "Nicolas",
+        "especialidad": "Cadiología",
+        "fecha_hora": "2025-05-23 11:00",
+        "estado": "pendiente",
+        "id_turno": 5
+    },
+    {
+        "dni": "38910884",
+        "nombre": "nicolas",
+        "especialidad": "psiquiatra",
+        "fecha_hora": "2025-05-16 09:30",
+        "estado": "pendiente",
+        "id_turno": 6
     }
 ]
